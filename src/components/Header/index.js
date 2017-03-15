@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
-import Layout from 'material-ui/Layout';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Text from 'material-ui/Text';
+
+import style from './style.css';
 
 export default class Header extends Component {
   render() {
-    console.log();
-
     return (
-      <Layout container gutter={24}>
-          <Layout item sm={6} xs={12}>Logo</Layout>
-          <Layout item sm={6} xs={12}>
+      <div className={style.header}>
+        <AppBar className={style.appBar}>
+          <Toolbar>
+            <Text style={{flex: 1}} type="title" colorInherit>To-Do List</Text>
             {this.props.children}
-          </Layout>
-      </Layout>
+          </Toolbar>
+        </AppBar>
+      </div>
     );
   }
 }

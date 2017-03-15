@@ -1,0 +1,13 @@
+.header {
+  height: 70px;
+}
+
+.logo {
+  font-size: 22px;
+  line-height: 22px;
+  padding: 14px 0;
+}
+
+.appBar {
+  position: relative;
+}

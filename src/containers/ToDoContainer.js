@@ -1,24 +1,43 @@
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
 import ToDoList from '../components/ToDoList';
-import {
-  addFilterText
-} from '../redux/modules/filter';
+
+// Actions
+import * as filterActions from '../redux/modules/filter';
+import * as taskActions from '../redux/modules/task';
 
 
-function mapStateToProps(state) {
+const toFilterTask = (params) => {
+  const { item, filterText, showDone } = params;
+  const { name, done } = item;
+  const filterTextBool = filterText===''?true:name.indexOf(filterText)>-1;
+  const showDoneBool = !showDone?true:done===true;
+
+  return filterTextBool&&showDoneBool;
+};
+
+
+function mapStateToProps(state) { console.log(state);
+  const { filter, task } = state;
+  const { filterText, showDone } = filter;
+  const { tasks } = task;
+
   return {
-    filter: state.filter
+    filterState: filter,
+    taskState: task.set('tasks', task.get('tasks').filter(item=>toFilterTask({
+      item,
+      filterText,
+      showDone
+    }))).toJS(),
   }
 }
 
-
 function mapDispatchToProps(dispatch) {
   return {
-    filterChange: (value) => dispatch(addFilterText(value)),
+    filterActions: bindActionCreators(filterActions, dispatch),
+    taskActions: bindActionCreators(taskActions, dispatch),
   };
 }
-
 
 export default connect(
   mapStateToProps,

@@ -1,10 +1,12 @@
 // Actions
 
 const CHANGE = 'filter/CHANGE';
+const CHANGE_SHOW_DONE = 'filter/CHANGE_SHOW_DONE';
 
 
 const initialState = {
-  filterText: ''
+  filterText: '',
+  showDone: false
 };
 
 
@@ -17,6 +19,12 @@ export default function filter(state = initialState, action = {}) {
       return {
         ...state,
         filterText: action.payload
+      }
+
+    case CHANGE_SHOW_DONE:
+      return {
+        ...state,
+        showDone: !!action.payload
       }
 
     default:
@@ -32,5 +40,12 @@ export function addFilterText(text='') {
   return {
     type: CHANGE,
     payload: text
+  }
+}
+
+export function changeShowDone(bool) {
+  return {
+    type: CHANGE_SHOW_DONE,
+    payload: bool
   }
 }
