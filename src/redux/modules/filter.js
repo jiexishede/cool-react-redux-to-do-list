@@ -6,7 +6,7 @@ const CHANGE_SHOW_DONE = 'filter/CHANGE_SHOW_DONE';
 
 const initialState = {
   filterText: '',
-  showDone: false
+  showDone: true
 };
 
 

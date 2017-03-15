@@ -27,11 +27,15 @@ export default class Task extends Component {
   render() {
     const {props, context} = this;
     const classes = context.styleManager.render(styleSheet);
-    const {task} = props;
+    const {task, changeDone} = props;
     const {name, done} = task;
 
     return (
-      <ListItem dense button className={classes.item}>
+      <ListItem
+        dense
+        button
+        onClick={()=>changeDone(!done)}
+        className={classes.item}>
         <Checkbox
           ripple={false}
           checked={done}
@@ -59,6 +63,7 @@ Task.PropTypes = {
     done: PropTypes.bool.isRequired,
     description: PropTypes.string,
   }),
+  changeDone: PropTypes.func
 };
 
 Task.contextTypes = {
